@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LED Stats Studio</title><link rel="stylesheet" href="/style.css">
+</head>
+<body class="admin">
+<div class="app-shell">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-mark">LS</div><div><b>LED STATS</b><small>STUDIO CONTROL</small></div></div>
+  <nav><a class="active" href="#editor">Szerkesztő</a><a href="#source">Adatforrás</a><a href="#preview">Előnézet</a></nav>
+  <div class="side-bottom"><span class="live-dot"></span><span id="sideStatus">Nincs adatforrás</span></div>
+</aside>
+<main class="workspace">
+<header class="topbar"><div><div class="eyebrow">BROADCAST GRAPHICS / CONTROL ROOM</div><h1>LED grafika szerkesztő</h1><p>Válaszd ki, milyen statisztikák jelenjenek meg a 1920 × 1080-as LED-falon.</p></div><a class="open-overlay" href="/overlay.html" target="_blank">LED kimenet megnyitása ↗</a></header>
+<section class="source-card" id="source">
+  <div class="section-heading"><div><span class="step">01</span><h2>Adatforrás</h2></div><span class="subtle">FIBA / MKOSZ mérkőzés</span></div>
+  <div class="url-row"><input id="url" type="url" placeholder="https://mkosz.hu/merkozes/..."><button id="connect" class="primary">Csatlakozás</button><button id="disconnect" class="ghost">Leállítás</button></div>
+  <div class="connection-line"><span class="status-dot" id="dot"></span><b id="status">Nincs csatlakoztatott mérkőzés</b><span id="updated">Még nem érkezett adat</span></div>
+  <p id="error" class="error">Nincs hiba.</p>
+</section>
+<div class="editor-layout" id="editor">
+<section class="editor-card">
+  <div class="section-heading"><div><span class="step">02</span><h2>Mit jelenítsünk meg?</h2></div><span class="subtle">Grafika beállításai</span></div>
+  <label class="field-label" for="displayMode">Grafika típusa</label>
+  <select id="displayMode">
+    <option value="topScorers">Top pontszerzők</option>
+    <option value="playerStats">Játékosstatisztikák</option>
+    <option value="teamComparison">Csapat-összehasonlítás</option>
+    <option value="scoreOnly">Eredmény kijelzése</option>
+  </select>
+  <div class="toggle-row score-toggle"><div><b>Eredmény megjelenítése</b><small>A csapatnevek és a pontszám legyen látható a LED-falon.</small></div><input id="showScore" type="checkbox" class="switch" checked></div>
+  <label class="field-label" for="graphicTitle">Grafika címe</label><input id="graphicTitle" value="PLAYER STATISTICS" maxlength="50">
+  <div class="two-fields"><div><label class="field-label" for="playerCount">Megjelenített játékosok</label><select id="playerCount"><option>3</option><option>5</option><option selected>6</option><option>8</option><option>10</option><option>12</option></select></div><div><label class="field-label" for="accent">Kiemelőszín</label><input id="accent" type="color" value="#27a9ff"></div></div>
+  <div class="divider"></div>
+  <div class="field-label">Statisztikák kijelölése</div>
+  <p class="help">Jelöld be, mely oszlopok jelenjenek meg a LED-falon.</p>
+  <div class="stat-grid">
+    <label><input type="checkbox" name="stat" value="points" checked><span>Pontok</span></label>
+    <label><input type="checkbox" name="stat" value="rebounds" checked><span>Lepattanók</span></label>
+    <label><input type="checkbox" name="stat" value="assists" checked><span>Gólpasszok</span></label>
+    <label><input type="checkbox" name="stat" value="steals"><span>Labdaszerzések</span></label>
+    <label><input type="checkbox" name="stat" value="turnovers"><span>Eladott labdák</span></label>
+    <label><input type="checkbox" name="stat" value="blocks"><span>Blokkok</span></label>
+    <label><input type="checkbox" name="stat" value="val"><span>VAL</span></label>
+    <label><input type="checkbox" name="stat" value="minutes"><span>Játékidő</span></label>
+    <label><input type="checkbox" name="stat" value="three"><span>Tripla dobás %</span></label>
+    <label><input type="checkbox" name="stat" value="plusMinus"><span>Plusz / mínusz</span></label>
+  </div>
+  <div class="divider"></div>
+  <div class="toggle-row"><div><b>Automatikus grafika-váltás</b><small>Váltson a kiválasztott nézetek között.</small></div><input id="autoRotate" type="checkbox" class="switch"></div>
+  <div class="two-fields"><div><label class="field-label" for="rotateSeconds">Váltás másodpercenként</label><select id="rotateSeconds"><option>5</option><option selected>10</option><option>15</option><option>20</option><option>30</option></select></div><div class="save-wrap"><button id="saveDisplay" class="primary wide">Beállítások alkalmazása</button></div></div>
+  <p id="saveMessage" class="save-message">A módosítások még nincsenek alkalmazva.</p>
+</section>
+<section class="preview-card" id="preview">
+  <div class="section-heading"><div><span class="step">03</span><h2>Előnézet</h2></div><span class="resolution">1920 × 1080</span></div>
+  <div class="preview-frame">
+    <div class="preview-top"><span id="previewTitle">PLAYER STATISTICS</span><span>LIVE DATA</span></div>
+    <div class="preview-score" id="previewScore"><b id="previewHome">HAZAI CSAPAT</b><strong id="previewHomeScore">—</strong><i>:</i><strong id="previewAwayScore">—</strong><b id="previewAway">VENDÉG CSAPAT</b></div>
+    <div class="preview-table"><div class="preview-head" id="previewHead"><span>JÁTÉKOS</span><span>PONT</span><span>LEP.</span><span>GÓLP.</span></div><div id="previewRows"><div class="empty-preview">Csatlakoztass egy mérkőzést az adatok előnézetéhez.</div></div></div>
+    <div class="preview-foot">LED STATS STUDIO <span>1920 × 1080 OUTPUT</span></div>
+  </div>
+  <div class="preview-actions"><a href="/overlay.html" target="_blank" class="ghost-link">Teljes képernyős LED kimenet ↗</a><span id="playerTotal">0 játékos</span></div>
+  <div class="data-card"><h3>Beolvasott adatforrás</h3><pre id="boxscore">A mérkőzés Box Score adatai itt jelennek meg.</pre></div>
+</section>
+</div>
+<footer>Helyi LED grafikai vezérlő · A forrásoldal adatelérhetőségétől függő frissítés</footer>
+</main>
+</div>
+<script src="/admin.js"></script>
+</body></html>
