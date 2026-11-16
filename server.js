@@ -243,6 +243,5 @@ app.get('/api/config', (_req, res) => res.json(config));
 app.get('/health', (_req, res) => res.json({ ok: true }));
 
 const PORT = Number(process.env.PORT || 3030);
-server.on('error', err => { if (err.code === 'EADDRINUSE') console.error(`A ${PORT}-as port foglalt. Állítsd le a korábbi példányt, vagy indítsd PORT=${PORT+1} npm start paranccsal.`); else console.error(err); process.exit(1); });
-server.listen(PORT, '127.0.0.1', () => console.log(`FIBA / MKOSZ LED Agent: http://127.0.0.1:${PORT}`));
+server.listen(PORT, '0.0.0.0', () => console.log(`FIBA / MKOSZ LED Agent listening on port ${PORT}`));
 process.on('SIGINT', async () => { await stopWatcher(); if (browser) await browser.close(); process.exit(0); });
