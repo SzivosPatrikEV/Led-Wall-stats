@@ -1,0 +1,9 @@
+{
+  "name": "fiba-led-stats-agent",
+  "version": "0.4.0",
+  "private": true,
+  "description": "Local FIBA / MKOSZ basketball stats watcher and 1920x1080 LED graphics overlay",
+  "main": "server.js",
+  "scripts": {"start": "node server.js", "install-browser": "playwright install chromium"},
+  "dependencies": {"express": "^4.21.2", "playwright": "^1.56.1", "ws": "^8.18.3"}
+}

@@ -1,0 +1,21 @@
+{
+  "pollIntervalMs": 3000,
+  "allowedHosts": [
+    "fiba.basketball",
+    "www.fiba.basketball",
+    "scores.fiba3x3.com",
+    "fiba3x3.com",
+    "www.fiba3x3.com",
+    "mkosz.hu",
+    "www.mkosz.hu"
+  ],
+  "selectors": {
+    "homeTeam": "",
+    "awayTeam": "",
+    "homeScore": "",
+    "awayScore": "",
+    "period": "",
+    "clock": "",
+    "statsRows": ""
+  }
+}
